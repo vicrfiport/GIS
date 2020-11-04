@@ -1,0 +1,6 @@
+{
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", "properties": { "existing": "Bangunan Perdagangan Jasa", "kdb": 50, "klb": 5.0, "kdh": 40, "dibangun": "Mall", "lantai_dibangun": 5, "lantai_maksimum": 10 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 106.804304913986485, -6.589142266607455 ], [ 106.804306381267651, -6.589007396614146 ], [ 106.804547862472106, -6.588966744787894 ], [ 106.80459571596171, -6.589149580015254 ], [ 106.804304913986485, -6.589142266607455 ] ] ] } }
+]
+}

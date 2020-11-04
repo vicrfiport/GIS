@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<head>
+    <body>
+<title>The jQuery Example</title>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+ 
+   <script type="text/javascript">
+        $.ajax({
+    type : 'GET',
+    dataType : 'json',
+    async: false,
+        url: 'jalan.json',
+        success : function(data) {
+            console.log(data); 
+            var topics = [];
+            $.each(data.results, function(index, obj){
+                topics.push({
+                    username: obj.TopicName,
+                    mentions: obj.LastHourCount,
+                    totalcount: obj.TotalCount,
+                    daycount: obj.Last24HoursCount
+                }); 
+            });
+            $('#leader').tmpl(topics).appendTo('#top3');
+        } 
+    });
+</script>
+</script>
+</head>
+<body>
+
+
