@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title> WEB GIS GEOjson</title>
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+<style type="text/css">
+#mapid {height: 100vh}
+</style>
+</head>
+<body>
+    <div id="mapid"></div>
+</body>
+<!-- <script src="assets/leaflet.ajax.js"></script> -->
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
+
+<script type="text/javascript">
+
+var mymap = L.map('mapid').setView([0,0],13); //-2.217103, 117.331784
+L.tileLayer('http://103.28.53.122:3002/api/maps/v1.0/geom/get-province?kodeprov=14', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,   
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoidmljcmkiLCJhIjoiY2toNDhwZHR5MDRsdTJ4cnVma3Zqa2xkNSJ9.3nJ32HvtReoxn0Gp57v0Ww'
+}).addTo(mymap)
+
+// var geojsonFeature = {
+//     "type": "Feature",
+//     "properties": {
+//         "name": "Coors Field",
+//         "amenity": "Baseball Stadium",
+//         "popupContent": "This is where the Rockies play!"
+//     },
+//     "geometry": {
+//         "type": "Point",   
+//         "15:21 / 40:44:21 / 40:4415:21 / 40:44oordinates": [-0.09, 51.505]
+//     }
+// };
+// L.geoJSON(geojsonFeature).addTo(mymap);
+
+// L.geoJSON(geojsonFeature).addTo(mymap);
+
+// function popUp(f,l){
+//     var 15:21 / 40:44:21 / 40:44t = [];
+//     if (f.properties){
+//         for(key in f.properties){
+//             out.push(key+": "+f.properties[key]);
+//         }
+//         l.bindPopup(out.join("<br />"));
+//     }
+// }
+// fetch('subzone.geojson') // fetching
+//   .then(function (response) {
+//       return response.json()
+//    }).then(function (data){
+//     L.geoJSON(data, {
+//         style: function(feature){
+//             switch (feature.properties.party) {
+//         }
+//     }).addTo(mymap);
+//     })
+
+// var myLines = [{
+//     "type": "LineString",
+//     "coordinates": [[-100, 40], [-105, 45], [-110, 55]] //styling
+// }, {
+//     "type": "LineString",
+//     "coordinates": [[-105, 40], [-110, 45], [-115, 55]]
+// }];
+
+// var myStyle = {
+//     "color": "#ff7800",
+//     "weight": 5,
+//     "opacity": 0.65
+// };
+
+// L.geoJSON(myLines, {
+//     style: myStyle
+// }).addTo(map);
+
+
+// var latlngs = [[37, -109.05],[41, -109.03],[41, -102.05],[37, -102.04]];
+
+// var polygon = L.polygon(latlngs, {color: 'red'}).addTo(map);
+
+// zoom the map to the polygon
+// map.fitBounds(polygon.getBounds());
+
+// latlngs = [
+//     [45.51, -122.68],
+//     [37.77, -122.43],
+//     [34.04, -118.2]
+// ];
+
+// var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+
+// zoom the map to the polyline
+// map.fitBounds(polyline.getBounds())
+
+var initpolygon  = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {'Party':'Democrat'},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.07844924926757812,
+              51.51461834694225
+            ],
+            [
+              -0.07844924926757812,
+              51.51301590715673
+            ],
+            [
+              -0.09492874145507812,
+              51.51515248101072
+            ],
+            [
+              -0.10711669921875,
+              51.51547295844541
+            ],
+            [
+              -0.10608673095703125,
+              51.51472517425703
+            ],
+            [
+              -0.07535934448242188,
+              51.50767403407925
+            ],
+            [
+              -0.07038116455078125,
+              51.51664802308175
+            ],
+            [
+              -0.10848999023437499,
+              51.51664802308175
+            ],
+            [
+              -0.07844924926757812,
+              51.51461834694225
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.08823394775390625,
+          51.524124996893335
+        ]
+      }
+    }     
+  ]
+}
+
+L.geoJSON(initpolygon, {
+    style: function(feature) {
+        switch (feature.properties.party) {
+            case 'Republican': return {color: "#ff0000"};
+            case 'Democrat':   return {color: "#FAEBD7"};
+        }
+    }
+}).addTo(mymap);
+
+// L.geoJson(data, {
+// 	style: function (feature) {
+// 		return {color: feature.properties.color};
+// 	},
+// 	onEachFeature: function (feature, layer) {
+// 		layer.bindPopup(feature.properties.description);
+// 	}
+// }).addTo(map)
+
+
+
+
+
++
+
+
+
+L.geoJSON(states, {
+    style: function(feature) {
+        switch (feature.properties.party) {
+            case 'Republican': return {color: "#ff0000"};
+            case 'Democrat':   return {color: "#0000ff"};
+        }
+    }
+}).addTo(mymap);
+
+var circle = L.circle([51.508,-0.11],{
+    color: 'yellow',
+    fillcolor: '#f83',
+    fillOpacity: 0.5,
+    radius : 500
+}).addTo(mymap) 
+
+</script>
+
+</html>
